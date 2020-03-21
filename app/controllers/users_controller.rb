@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 	
 	before_action :set_user, only: [:edit, :update, :show]
-	before_action :require_user, except: [:show]
 	before_action :require_same_user, only: [:edit, :update] 
 
 	def new
@@ -18,8 +17,9 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
+			session[:user_id] = @user.id
 			flash[:success] = "welcome #{@user.username}"
-			redirect_to user_path(user)
+			redirect_to user_path(@user)
 		else
 			render 'new'
 		end
@@ -49,7 +49,7 @@ private
 
 	def require_same_user
 		if logged_in? && curent_user != @user
-			flash[:danger] = 'matst3batshi taaani :P'
+			flash[:danger] = 'la yagooz :P'
 			redirect_to root_path
 		end
 	end
