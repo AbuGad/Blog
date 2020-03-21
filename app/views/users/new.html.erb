@@ -1,25 +1,48 @@
 <h1>create user</h1>
+
 <div class= "">
-<% if @user.errors.any? %>
-	<ul>
-		<% @user.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-		<% end %>
-	</ul>
-<%end%>
-<%= form_for @user do |u| %>
-	<%= u.label :username %>
-	<p>
-	<%= u.text_field :username %>
-	<p>
-	<%= u.label :email %>
-	<p>
-	<%= u.email_field :email %>
-	<p>
-	<%= u.label :password %>
-	<p>
-	<%= u.password_field :password %>
-	<p>
-	<%= u.submit 'signup' %>
-<%end%>
+
+	<% if @user.errors.any? %>
+		
+		<ul>
+			
+			<% @user.errors.full_messages.each do |msg| %>
+				
+				<li><%= msg %></li>
+	<% end %>
+	
+		</ul>
+	
+	<%end%>
+
+	<%= form_for @user do |u| %>
+	
+		<%= u.label :username %>
+	
+		<p>
+	
+		<%= u.text_field :username %>
+	
+		<p>
+	
+		<%= u.label :email %>
+	
+		<p>
+	
+		<%= u.email_field :email %>
+	
+		<p>
+	
+		<%= u.label :password %>
+	
+		<p>
+	
+		<%= u.password_field :password %>
+	
+		<p>
+	
+		<%= u.submit 'signup' %>
+
+	<%end%>
+
 </div>

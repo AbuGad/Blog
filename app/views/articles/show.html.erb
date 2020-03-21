@@ -1,7 +1,13 @@
 <h1>Showing Article</h1>
+
 Created By :<%= @article.user.username %>
+
 <p></p>
+
 <p> title: <%= @article.title %> </p>
+
 <p> descrtption: <%= @article.description %> </p>
+
 <br>
+
 <%= link_to'Listing All Articles' , articles_path %>
