@@ -1,0 +1,30 @@
+<h1>update article</h1>
+
+<% if @article.errors.any? %>
+	<ul>
+		<%= @article.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<%end%>
+
+
+<%= form_for @article do |g| %>
+
+<p>
+	<%= g.label :title %>
+	<br>
+	<%= g.text_field :title %>
+</p>
+
+<p>
+	<%= g.label :description %>
+	<br>
+	<%= g.text_area :description %>
+</p>
+
+<%= g.submit %>
+
+<% end %>
+<br>
+<%= link_to'Listing All Articles' , articles_path %>
