@@ -10,4 +10,10 @@ Rails.application.routes.draw do
   get 'login' , to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+
+  #post "deactivate", to: "users#deactivate"
+
+ 	put 'deactivate/:id', to: 'users#deactivate', as: :deactivate
+ 	put 'activate/:id', to: 'users#activate', as: :activate
+
 end

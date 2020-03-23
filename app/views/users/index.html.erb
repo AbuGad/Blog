@@ -5,8 +5,20 @@
 <% @users.each do |user| %>
 			
 	<li><%= link_to user.username, user_path(user) %></li>
-			
-	<li><%= pluralize(user.articles.count,'articles') if user.articles %></li>
+
+		<li>
+
+			<%=link_to "Deactivate", deactivate_path(user), method: :put, data: { confirm: "You sure?" } %>
 	
+		</li>
+
+		<li>
+
+			<%=link_to "activate", activate_path(user), method: :put, data: { confirm: "You sure?" } %>
+	
+		</li>
+
+	<li><%= pluralize(user.articles.count,'articles') if user.articles %></li>
+		---
 <% end %>
 

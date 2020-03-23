@@ -1,14 +1,14 @@
 <h1>showing <%= @user.username%> articles</h1>
-	
+
 <div>
 	<table>
 		
 		<p>
 		
 		<th><%= render 'articles/article', rbj: @user.articles %></th>
-	
+
 	</table>
-		
+
 		<li><%= link_to 'all articles' , articles_path %></li>
 		
 		<li><%= link_to 'edit proile' , edit_user_path(@user)%> </li>
@@ -16,6 +16,5 @@
 		<li><%= link_to 'all users' , users_path %> </li>
 		
 		<li><%= link_to 'create new article' , new_article_path %> </li>
-
 </div>
 

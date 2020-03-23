@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	
-	before_action :set_user, only: [:edit, :update, :show]
+	before_action :set_user, only: [:edit, :update, :show, :deactivate, :activate ]
 	before_action :require_same_user, only: [:edit, :update] 
 
 	def new
@@ -12,6 +12,11 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		if @user.deactivated?  
+			flash[:danger] = 'ask admin to active this user first'
+			redirect_to users_path
+		else
+		end
 	end
 
 	def create
@@ -26,6 +31,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+	
 	end
 
 	def update
@@ -37,10 +43,28 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def deactivate
+  		if  @user.deactivated_account!
+    		flash[:notice] = 'admin deactivated this acc'
+    		redirect_to users_path 
+    		
+  		else
+ 	 	end
+	end
+
+	def activate
+		if @user.activate_account! 
+			flash[:success] = 'this user is active now'
+			redirect_to users_path(@user)	
+		else
+		end
+	end
+
+
 private
 
 	def user_params
-		params.require(:user).permit(:username , :email , :password)
+		params.require(:user).permit(:username , :email , :password,)
 	end
 
 	def set_user
