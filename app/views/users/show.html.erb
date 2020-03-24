@@ -10,8 +10,15 @@
 	</table>
 
 		<li><%= link_to 'all articles' , articles_path %></li>
+
+		<% if curent_user.admin? %>
+
+			<li><%= link_to 'edit proile' , edit_user_path(@user)%></li>
+
+			<li><%= link_to 'Delete User' , user_path(@user),
+				 method: :delete , data: {confirm: 'Are U Sure'}%></li>
 		
-		<li><%= link_to 'edit proile' , edit_user_path(@user)%> </li>
+		<%end%>
 		
 		<li><%= link_to 'all users' , users_path %> </li>
 		

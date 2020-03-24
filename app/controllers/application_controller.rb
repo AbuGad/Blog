@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-helper_method :curent_user, :logged_in?
+helper_method :curent_user, :logged_in?, :user_deactivate
 
 	def curent_user
 		@curent_user ||= User.find(session[:user_id]) if session[:user_id]

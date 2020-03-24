@@ -7,16 +7,16 @@
 		<% rbj.each do |t| %>
 			<tr>
 				<th><%= t.title %></th>   <th><%= t.description %></th>
-				<th>||<%= link_to'show article' , article_path(t)%> ||</th> 
-				<% if logged_in? && curent_user == t.user %>
-				<th><%= link_to'edit', edit_article_path(t)%> ||</th> 
-				<th><%= link_to'delete' , article_path(t) , method: :delete ,data: {confirm: 'are u sure'}%> ||</th>
-				<th>
+				<td>||<%= link_to'show article' , article_path(t)%> ||</td> 
+				<% if logged_in? && ( curent_user == t.user || curent_user.admin?)  %>
+				<td><%= link_to'edit', edit_article_path(t)%> ||</td> 
+				<td><%= link_to'delete' , article_path(t) , method: :delete ,data: {confirm: 'are u sure'}%> ||</td>
+				<td>
 					<small>Created By: <%= t.user.username %>,
 	 					<%= time_ago_in_words(t.created_at) %> ago,
 	  					last updated: <%= time_ago_in_words(t.updated_at)%> ago ||
 	  				</small>
-	  			</th>
+	  			</td>
 	  		<% end %>
 		</tr>
 	<%end%>

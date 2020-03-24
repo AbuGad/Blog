@@ -5,19 +5,19 @@
 <% @users.each do |user| %>
 			
 	<li><%= link_to user.username, user_path(user) %></li>
-
-		<li>
-
-			<%=link_to "Deactivate", deactivate_path(user), method: :put, data: { confirm: "You sure?" } %>
+		<% if curent_user.admin? %>
+			<% if @user = user.deactivated?  %>
+				<li>
+					<%=link_to "Active", activate_path(user),
+						 method: :put, data: { confirm: "You sure?" } %>
+				</li>
+			<%end%> 
+				<li>
+					<%=link_to "Deactivate", deactivate_path(user), 
+						method: :put, data: { confirm: "You sure?" } %>
+				</li>
+		<%end%>		
 	
-		</li>
-
-		<li>
-
-			<%=link_to "activate", activate_path(user), method: :put, data: { confirm: "You sure?" } %>
-	
-		</li>
-
 	<li><%= pluralize(user.articles.count,'articles') if user.articles %></li>
 		---
 <% end %>

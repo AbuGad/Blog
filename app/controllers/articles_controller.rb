@@ -61,7 +61,7 @@ private
 	end
 
 	def require_same_user
-		if curent_user != @article.user
+		if curent_user != @article.user and !curent_user.admin?
 			flash[:danger] = 'matst3batsh ya 7abebi :P'
 			redirect_to root_path
 		end

@@ -43,6 +43,14 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		@user.destroy
+		flash[:danger] = 'This User And All His Articles Was Successfully Deleted'
+		redirect_to users_path
+		
+	end
+
 	def deactivate
   		if  @user.deactivated_account!
     		flash[:notice] = 'admin deactivated this acc'
@@ -53,9 +61,9 @@ class UsersController < ApplicationController
 	end
 
 	def activate
-		if @user.activate_account! 
+		if @user.activate_account!
 			flash[:success] = 'this user is active now'
-			redirect_to users_path(@user)	
+			redirect_to users_path	
 		else
 		end
 	end
@@ -72,8 +80,8 @@ private
 	end
 
 	def require_same_user
-		if logged_in? && curent_user != @user
-			flash[:danger] = 'la yagooz :P'
+		if curent_user != @user and !curent_user.admin?
+			flash[:danger] = 'layagooz :P'
 			redirect_to root_path
 		end
 	end
