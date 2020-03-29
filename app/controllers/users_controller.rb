@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	
-	before_action :set_user, only: [:edit, :update, :show, :deactivate, :activate ]
+	before_action :set_user, only: [:edit, :update, :show, :activate , :deactivate ,:toggle_activation ]
 	before_action :require_same_user, only: [:edit, :update] 
 
 	def new
@@ -47,15 +47,13 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.destroy
 		flash[:danger] = 'This User And All His Articles Was Successfully Deleted'
-		redirect_to users_path
-		
+		redirect_to users_path		
 	end
 
 	def deactivate
   		if  @user.deactivated_account!
     		flash[:notice] = 'admin deactivated this acc'
-    		redirect_to users_path 
-    		
+    		redirect_to users_path
   		else
  	 	end
 	end
@@ -63,10 +61,21 @@ class UsersController < ApplicationController
 	def activate
 		if @user.activate_account!
 			flash[:success] = 'this user is active now'
-			redirect_to users_path	
+			redirect_to users_path(@user)	
 		else
 		end
 	end
+
+	#def toggle_activation
+	#	if  @user.deactivated_account!
+	#		@user.activate_account!
+    #		flash[:notice] = 'admin activate this acc'
+    #	else
+    #		@user.activate_account!
+	#		flash[:success] = 'this user is active now'
+	#	end
+	#	redirect_to users_path
+	#end
 
 
 private

@@ -4,14 +4,16 @@ Rails.application.routes.draw do
   get 'about', to: 'welcome#about'
 
   resources :articles
+
+  post 'articles/:id/like', to: 'likes#create' , as: :like_article
+  post 'articles/:id/unlike', to: 'likes#destroy', as: :unlike_article
+  
   get 'signup', to: 'users#new'
   resources :users , exxcept:[:new]
 
   get 'login' , to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-
-  #post "deactivate", to: "users#deactivate"
 
  	put 'deactivate/:id', to: 'users#deactivate', as: :deactivate
  	put 'activate/:id', to: 'users#activate', as: :activate

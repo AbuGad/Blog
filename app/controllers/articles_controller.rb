@@ -52,6 +52,7 @@ class ArticlesController < ApplicationController
 	end
 
 private
+
 	def article_params
 		params.require(:article).permit(:title, :description)
 	end
@@ -62,7 +63,7 @@ private
 
 	def require_same_user
 		if curent_user != @article.user and !curent_user.admin?
-			flash[:danger] = 'matst3batsh ya 7abebi :P'
+			flash[:danger] = 'You Can Only edit and Upadate your Articles'
 			redirect_to root_path
 		end
 	end

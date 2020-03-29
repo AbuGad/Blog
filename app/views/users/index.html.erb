@@ -6,16 +6,17 @@
 			
 	<li><%= link_to user.username, user_path(user) %></li>
 		<% if curent_user.admin? %>
-			<% if @user = user.deactivated?  %>
+			<% if @user = user.deactivated? %>
 				<li>
 					<%=link_to "Active", activate_path(user),
 						 method: :put, data: { confirm: "You sure?" } %>
 				</li>
-			<%end%> 
-				<li>
-					<%=link_to "Deactivate", deactivate_path(user), 
-						method: :put, data: { confirm: "You sure?" } %>
-				</li>
+			<%else%>
+					<li>
+						<%=link_to "Deactivate", deactivate_path(user), 
+							method: :put, data: { confirm: "You sure?" } %>
+					</li>
+				<% end %>	
 		<%end%>		
 	
 	<li><%= pluralize(user.articles.count,'articles') if user.articles %></li>

@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
 	has_secure_password
 	
 	has_many :articles , dependent: :destroy
-	
+	has_many :likes
+	has_many :like_articles
 	before_save { self.email = email.downcase }
 	validates :username, presence: true, uniqueness: {case_sensitive: false },
 			length: {minimum: 3 , maximum: 30 }
@@ -17,6 +18,10 @@ class User < ActiveRecord::Base
 
 	def deactivated_account!   
   		update_attribute :deactivated, true
+	end
+
+	def activate
+		update_attribute :activate , true
 	end
 
 end
