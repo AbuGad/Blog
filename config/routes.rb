@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'welcome#home'
   get 'about', to: 'welcome#about'
 
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
 
   post 'articles/:id/like', to: 'likes#create' , as: :like_article
   post 'articles/:id/unlike', to: 'likes#destroy', as: :unlike_article

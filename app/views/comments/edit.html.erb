@@ -1,0 +1,15 @@
+<h1>Update Comment</h1>
+
+<%= form_for ([@article, @comment]) do |c| %>
+
+<p>
+ 	<%= c.label :your_comment %> 
+ 	<br>
+ 	<%= c.text_area :body %>
+ </p>
+
+<p>
+	<%= c.submit %>
+</p>
+
+<%end%>

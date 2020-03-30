@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	has_many :articles , dependent: :destroy
 	has_many :likes
 	has_many :like_articles
+	has_many :comments
 	before_save { self.email = email.downcase }
 	validates :username, presence: true, uniqueness: {case_sensitive: false },
 			length: {minimum: 3 , maximum: 30 }

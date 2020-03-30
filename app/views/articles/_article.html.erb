@@ -11,7 +11,7 @@
 
 				<% if t.likes.where(user: curent_user).any? %>
 					<td><%= link_to'unlike' , unlike_article_path(t),
-						method: :destroy  %> ||
+						method: :destroy %> ||
 					</td> 	
 				<%else%>	
 					<td><%= link_to'Like' , like_article_path(t),

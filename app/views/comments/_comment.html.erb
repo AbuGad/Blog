@@ -1,0 +1,21 @@
+<br>
+	<th>
+		<%= comment.body %>
+	</th>
+  	
+  	<% if curent_user == @article.comments || curent_user.admin? %>
+  	
+  		<th>
+  			<%= link_to 'delete', [comment.article,comment] , 
+  				method: :delete ,data: {confirm: 'Are U Sure'} %> ||
+		</th>
+
+		<th>
+  			<%= link_to 'Edit Comment', 
+  				edit_article_comment_path(comment.article, comment) %>
+		</th>
+	
+	<%end%>
+</br>
+-->
+{ <%= time_ago_in_words(comment.created_at) %> }

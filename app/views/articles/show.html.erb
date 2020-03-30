@@ -1,13 +1,27 @@
 <h1>Showing Article</h1>
 
 Created By :<%= @article.user.username %>
-
-<p></p>
-
-<p> title: <%= @article.title %> </p>
-
-<p> descrtption: <%= @article.description %> </p>
-
 <br>
+-----------------------
+
+<p>
+	title: <%= @article.title %> 
+</p>
+
+<p>
+	 descrtption: <%= @article.description %>
+</p>
+----------
+<h4>
+	<%= @article.comments.count %> Comment
+</h4>
+
+<%= render @article.comments %>
+
+<br> ----
+
+<h2>Add Comment</h2>
+
+<%= render 'comments/form' %>
 
 <%= link_to'Listing All Articles' , articles_path %>
