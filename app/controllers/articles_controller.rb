@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 
-	before_action :set_article, only: [:edit, :update, :destroy]
+	before_action :set_article, only: [:edit, :update, :destroy, :private, :public, :show]
 	before_action :require_user, except: [:index, :show]
 	before_action :require_same_user, only: [:edit, :update, :destroy]
 	
@@ -9,11 +9,14 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find(params[:id])
-		@article.user = curent_user
 		if !logged_in?
 			flash[:danger] = 'u must be login'
+			return 
 			redirect_to root_path
+		end
+		if @article.private? 
+			flash[:notice] = 'Hidden Content, Ask User To Make It Puplic First'
+			redirect_to articles_path
 		end
 	end
 
@@ -49,6 +52,20 @@ class ArticlesController < ApplicationController
 		@article.destroy
 		flash[:notice] = 'article was successfully deleted'
 		redirect_to articles_path
+	end
+
+	def private
+		if @article.private_article!
+			flash[:notice] = 'Now it Private'
+			redirect_to articles_path
+		end
+	end
+
+	def public
+		if @article.public_article!	
+			flash[:notice] = 'Now It Public'
+			redirect_to article_path(@article)
+		end
 	end
 
 private

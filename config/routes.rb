@@ -19,4 +19,7 @@ Rails.application.routes.draw do
  	put 'deactivate/:id', to: 'users#deactivate', as: :deactivate
  	put 'activate/:id', to: 'users#activate', as: :activate
 
+  put 'private/:id', to: 'articles#private', as: :private
+  put 'public/:id', to: 'articles#public', as: :public
+
 end

@@ -1,6 +1,16 @@
 <h1>Showing Article</h1>
 
 Created By :<%= @article.user.username %>
+
+<% if curent_user == @article.user || curent_user.admin? %>
+	
+	<p>Make This Article 
+		<%= link_to'private', private_path(@article), method: :put ,
+			 data: {confirm: 'make it private'} %>
+	</p>
+
+<%end%>
+
 <br>
 -----------------------
 
