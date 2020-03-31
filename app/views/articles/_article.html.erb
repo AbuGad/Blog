@@ -10,11 +10,11 @@
 				<td>||<%= link_to'show article' , article_path(t)%> ||</td>
 
 				<% if t.likes.where(user: curent_user).any? %>
-					<td><%= link_to'unlike' , unlike_article_path(t),
-						method: :destroy %> ||
+					<td><%= link_to'unlike' , toggle_like_path(t),
+						method: :post %> ||
 					</td> 	
 				<%else%>	
-					<td><%= link_to'Like' , like_article_path(t),
+					<td><%= link_to'Like' , toggle_like_path(t),
 							method: :post %> ||
 					</td> 
 				<%end%>

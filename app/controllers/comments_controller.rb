@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-
+ before_action :require_same_user, only: [:edit, :update]
+	
 	def show
-		
+		@comment = Comment.all
 	end
 	
 	def new
@@ -9,9 +10,13 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-		@article = Article.find_by(params[:id])
-		@comment = @article.comments.create(params[:comment].permit(:name, :body))
-		redirect_to article_path(@article)
+		@comment = Comment.new(comment_params)
+		if @comment.save
+			flash[:notice] = 'Your Comment Added'
+		else
+			flash[:notice] = 'noooo'
+		end
+		redirect_to articles_path
 	end
 
 	def update
@@ -38,4 +43,15 @@ class CommentsController < ApplicationController
 		redirect_to article_path(@article)
 	end
 
+private
+	def require_same_user
+		if curent_user != @user and !curent_user.admin?
+			flash[:danger] = 'al3b b3ed ya shateer :P'
+			redirect_to article_path(@article)
+		end
+	end
+	
+	def comment_params
+		params.require(:comment).permit(:body , :user_id, :article_id)
+	end
 end

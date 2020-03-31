@@ -1,5 +1,6 @@
 <%= form_for ([@article,@article.comments.build]) do |c| %>
-
+<%= c.hidden_field :user_id, value: curent_user.id %>
+<%= c.hidden_field :article_id, value: @article.id %>
 <p>
  	<%= c.label :your_comment %> 
  	<br>

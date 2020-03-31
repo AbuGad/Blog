@@ -7,8 +7,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  post 'articles/:id/like', to: 'likes#create' , as: :like_article
-  post 'articles/:id/unlike', to: 'likes#destroy', as: :unlike_article
+  post 'articles/:id/like', to: 'likes#toggle' , as: :toggle_like
   
   get 'signup', to: 'users#new'
   resources :users , exxcept:[:new]

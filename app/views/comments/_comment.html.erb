@@ -1,9 +1,9 @@
 <br>
 	<th>
-		<%= comment.body %>
+		<%= comment.user.username %>: <%= comment.body %>
 	</th>
   	
-  	<% if curent_user == @article.comments || curent_user.admin? %>
+  	<% if comment.user == curent_user || curent_user.admin? %>
   	
   		<th>
   			<%= link_to 'delete', [comment.article,comment] , 
