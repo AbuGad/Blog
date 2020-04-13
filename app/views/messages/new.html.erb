@@ -1,0 +1,10 @@
+<h1>Create Message</h1>
+
+<%= form_for [ @recipient, @message] do |f| %>
+	<table>
+    	<tr><%= f.label "Enter Your Message" %></tr>
+    		<td><%= f.text_field :body %></td>
+	</table>
+	<p></p>
+	<tr><%= f.submit "Send Message" %></tr>
+<% end %>

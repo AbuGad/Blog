@@ -1,0 +1,9 @@
+<h2><%= @recipient.username %> Inbox</h2>
+<% @messages.each do |message| %>
+   <li> <%= @sender.username %> :<%= message.body %> </li>
+   <li><%= link_to 'Replay', new_user_message_path(@sender,message) %></li>
+   <li><%= link_to 'Delete Message',user_message_path(@recipient,message),
+   			method: :delete, data: {confirm: 'Deleted!'} %></li>
+	<li>Recive <%= time_ago_in_words(message.created_at) %> ago </li>
+----
+<% end %>

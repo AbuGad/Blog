@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   post 'articles/:id/like', to: 'likes#toggle' , as: :toggle_like
   
   get 'signup', to: 'users#new'
-  resources :users , exxcept:[:new]
+  resources :users , except:[:new] do
+    resources :messages
+  end
 
   get 'login' , to: 'sessions#new'
   post 'login', to: 'sessions#create'

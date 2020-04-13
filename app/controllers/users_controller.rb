@@ -66,6 +66,14 @@ class UsersController < ApplicationController
 		end
 	end
 
+	 def sender
+      @user = User.find(params[:id])
+    end
+
+    def recipient
+      @user = User.find(params[:id])
+    end
+    
 	#def toggle_activation
 	#	if  @user.deactivated_account!
 	#		@user.activate_account!

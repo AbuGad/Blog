@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_31_180748) do
+ActiveRecord::Schema.define(version: 2020_04_02_222630) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2020_03_31_180748) do
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.integer "sender_id"
+    t.integer "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

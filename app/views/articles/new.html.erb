@@ -1,4 +1,4 @@
-<h1>Create Articles</h1>
+<h1 align="center">Create Articles</h1>
 
 <% if @article.errors.any? %>
 	<ul>
@@ -8,25 +8,33 @@
 	</ul>
 <%end%>
 
-
-<%= form_for @article do |g| %>
-
-	<p>
-		<%= g.label :title %>
-		<br>
-		<%= g.text_field :title %>
-	</p>
-
-	<p>
-		<%= g.label :description %>
-		<br>
-		<%= g.text_area :description %>
-	</p>
-
-	<%= g.submit %>
-
-<% end %>
-
-<br>
-
-<%= link_to 'Listing All Articles', articles_path %>
+<div class="row">
+	<div class="col-xs-12">
+		<%= form_for(@article, :html => {class: 'form-horizontal', role: 'form'}) do |g| %>
+			<div class="form-group">
+				<div class="control-lable col-sm-2">
+					<%= g.label :title %>
+				</div>
+				<div class="col-sm-6">
+					<%= g.text_field :title, class: 'form-control', placeholder: 'Title', autofoucs: true %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="control-lable col-sm-2">
+					<%= g.label :description %>
+				</div>
+				<div class="col-sm-6">
+					<%= g.text_area :description, rows:8, class: 'form-control', placeholder: 'Description', autofoucs: true %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-6">
+					<%= g.submit class: 'btn btn-primary ptn-large' %>
+				</div>
+			</div>
+		<% end %>
+		<div class="col-xs-4 col-xs-offset-5">
+			{ <%= link_to 'Listing All Articles', articles_path %> }
+		</div>
+	</div>
+</div>

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 	has_many :likes
 	has_many :like_articles
 	has_many :comments
+	has_many :messages, class_name: "Message", foreign_key: "recipient_id"
+  	has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
 	before_save { self.email = email.downcase }
 	validates :username, presence: true, uniqueness: {case_sensitive: false },
 			length: {minimum: 3 , maximum: 30 }
