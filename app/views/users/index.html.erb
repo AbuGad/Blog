@@ -1,28 +1,31 @@
-<h1>listing all users</h1>
-
-<h1>Name</h1>
+<h1 align="center">{ Listing All Users }</h1>
 	
 <% @users.each do |user| %>
-			
-	<li><%= link_to user.username, user_path(user) %></li>
-		
-		<%= link_to 'Send Message', new_user_message_path(user) %>
-			
-			<% if curent_user.admin? %>
-				<% if @user = user.deactivated? %>
-					<li>
-						<%=link_to "Active", activate_path(user),
-							 method: :put, data: { confirm: "You sure?" } %>
-					</li>
-				<%else%>
-						<li>
-							<%=link_to "Deactivate", deactivate_path(user), 
-								method: :put, data: { confirm: "You sure?" } %>
-						</li>
-					<% end %>	
-			<%end%>		
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+			<div class="well">
+				<div align="center">
+					<td>User: <%= link_to user.username, user_path(user) %></td>
+					<li><%= pluralize(user.articles.count,
+							'articles') if user.articles %></li>
+					<td><%= link_to 'Send Message', new_user_message_path(user),
+						 class: 'btn btn-xs btn-success' %></td>
+					<% if curent_user.admin? %>
+						<% if @user = user.deactivated? %>
 
-		<li><%= pluralize(user.articles.count,'articles') if user.articles %></li>
-	---
+								<%=link_to "Active", activate_path(user),
+									method: :put, data: { confirm: "You sure?" },
+									class: "btn btn-xs btn-primary" %>
+						<%else%>
+
+								<%=link_to "Deactivate", deactivate_path(user), 
+									method: :put, data: { confirm: "You sure?" },
+									class: 'btn btn-xs btn-danger' %>
+						<% end %>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
 <% end %>
 

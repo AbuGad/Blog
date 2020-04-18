@@ -1,46 +1,49 @@
-<table>
-
-	<tr>
-		<th>Title </th>
-		<th>Description </th>
-	<% if logged_in? %>
-		</tr>
-			<% rbj.each do |t| %>
-				<tr>
-					<th><%= t.title %></th>   <th><%= t.description %></th>
-					<td>||<%= link_to'show article' , article_path(t)%> || 
-						 <td>
-						 	<% if t.private and
-						 		 (curent_user == t.user || curent_user.admin?) %>
-
+<% if logged_in? %>
+	<% rbj.each do |t| %>
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div class="well well-lg">
+					<div class="article-title">
+						<%= link_to t.title, article_path(t) %>
+					</div>
+					<div class="article-body">
+						<%=truncate(t.description, length: 100) %>
+					</div>
+					<div class="article-actions">
+						<% if logged_in? && 
+						( curent_user == t.user || curent_user.admin?)   %>
+							<%= link_to'Delete', article_path(t),
+	 							method: :delete, data: {confirm: 'Are You Sure!'},
+	 							 class: 'btn btn-xs btn-danger' %>	
+	 	
+	 						<%= link_to'Edit', edit_article_path(t),
+	 		 					class: 'btn btn-xs btn-primary' %>
+	 		 				<% if t.private and
+					 			(curent_user == t.user || curent_user.admin?) %>
 									<%= link_to'Public', public_path(t), method: :put ,
-			 							data: {confirm: 'make it Public Agine'} %>||
-			 				<%end%>
-			 			</td>
-			 		</td>
+		 								data: {confirm: 'Make It Public Agine'},
+		 								class: 'btn btn-xs btn-success' %>
+		 					<%end%>
+								
+							<% if t.likes.where(user: curent_user).any? %>
+								<%= link_to'unlike' , toggle_like_path(t),
+									method: :post,
+									class: 'btn btn-xs btn-primary' %>	
+							<%else%>	
+								<%= link_to'Like' , toggle_like_path(t),
+									method: :post,
+									class: 'btn btn-xs btn-success' %> 
+							<%end%>
 
-					<% if t.likes.where(user: curent_user).any? %>
-						<td><%= link_to'unlike' , toggle_like_path(t),
-							method: :post %> ||
-						</td> 	
-					<%else%>	
-						<td><%= link_to'Like' , toggle_like_path(t),
-								method: :post %> ||
-						</td> 
-					<%end%>
-						<td><%= pluralize(t.likes.count,'likes') %>||</td>
-
-					<% if logged_in? && ( curent_user == t.user || curent_user.admin?)   %>
-						<td><%= link_to'edit', edit_article_path(t)%> ||</td> 
-						<td><%= link_to'delete' , article_path(t) , method: :delete ,data: {confirm: 'are u sure'}%> ||</td>
-						<td>
-							<small>Created By: <%= t.user.username %>,
-		 						<%= time_ago_in_words(t.created_at) %> ago,
-		  						last updated: <%= time_ago_in_words(t.updated_at)%> ago ||
-		  					</small>
-		  				</td>
-		  		<% end %>
-			</tr>
-		<%end%>
+							<%= pluralize(t.likes.count,'likes') %>
+							<p></p>
+							Created By: <%= t.user.username %>,
+	 								<%= time_ago_in_words(t.created_at) %> ago,
+	  							last updated: <%= time_ago_in_words(t.updated_at)%> ago
+	  					<% end %>		
+					</div>
+				</div>
+			</div>
+		</div>
 	<%end%>
-</table>
+<%end%>

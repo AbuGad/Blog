@@ -44,7 +44,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
-        <li><%= link_to 'inbox', user_messages_path(curent_user)%></li>
+        <li id="nav-link"><%= link_to 'inbox', user_messages_path(curent_user)%></li>
           <li><%= link_to 'logout', logout_path, method: :delete %></li>
           <li class="dropdown">
             <li><%= link_to 'edit your acc', edit_user_path(curent_user) %></li>

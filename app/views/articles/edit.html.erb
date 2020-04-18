@@ -1,11 +1,25 @@
 <h1 align="center">update article</h1>
 
 <% if @article.errors.any? %>
-	<ul>
-		<%= @article.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-		<% end %>
-	</ul>
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h2 class="panel-title">
+						<%= pluralize(@article.errors.count, "error") %>
+						Prevent Article From Being Create:
+					</h2>
+					<div class="panel-body">
+						<ul>
+							<% @article.errors.full_messages.each do |msg| %>
+								<li><%= msg %></li>
+							<% end %>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <%end%>
 
 

@@ -1,29 +1,24 @@
-<h1>showing <%= @user.username%> articles</h1>
+<h1 align="center">showing ~<strong><%= @user.username%></strong>~ articles</h1>
 
-<div>
-	<table>
-		
-		<p>
-		
-		<th><%= render 'articles/article', rbj: @user.articles %></th>
+<div class="row">
+	<div class="col col-xs-8 col-xs-offset-2">
+		<div class="well well-lg">
+			<h3>Helper Link's</h3>
+			<li><%= link_to 'all articles' , articles_path %></li>
 
-	</table>
+			<% if ( curent_user.admin?) %>
 
-		<li><%= link_to 'all articles' , articles_path %></li>
+				<li><%= link_to 'edit proile' , edit_user_path(@user)%></li>
 
-		<% if ( curent_user.admin?) %>
+				<li><%= link_to 'Delete User' , user_path(@user),
+					method: :delete ,
+					data: {confirm: 'Are U Sure'}%></li>
 
-			<li><%= link_to 'edit proile' , edit_user_path(@user)%></li>
-
-			<li><%= link_to 'Delete User' , user_path(@user),
-				 method: :delete , data: {confirm: 'Are U Sure'}%></li>
-
-			<li><%= link_to 'Send Message', new_user_message_path(@user) %></li>
-		
-		<%end%>
-		
-		<li><%= link_to 'all users' , users_path %> </li>
-		
-		<li><%= link_to 'create new article' , new_article_path %> </li>
+				<li><%= link_to 'Send Message', user_messages_path(@user.id) %></li>
+			<%end%>
+				<li><%= link_to 'all users' , users_path %> </li>
+				<li><%= link_to 'create new article' , new_article_path %> </li>
+		</div>
+		<%= render 'articles/article', rbj: @user.articles %>	
+	</div>
 </div>
-

@@ -1,37 +1,35 @@
-<h1>Showing Article</h1>
+<h2 align="center">Created By: <strong><%= @article.user.username %></strong></h2>
 
-Created By :<%= @article.user.username %>
-
-<% if curent_user == @article.user || curent_user.admin? %>
+<h2 align="center">Title: <%= @article.title %></h2>
 	
-	<p>Make This Article 
-		<%= link_to'private', private_path(@article), method: :put ,
-			 data: {confirm: 'make it private'} %>
-	</p>
+<div class="well col-xs-8 col-xs-offset-2">
+	<h3 class="center description"><strong>Description:</strong></h3>
+	<hr>
+	<%= simple_format(@article.description) %>
+		<div class="artcile-actions">
+			<% if curent_user == @article.user || curent_user.admin? %>
+			
+			<%= link_to'Make Article Private', private_path(@article), method: :put ,
+		 			data: {confirm: 'make it private'},
+		 			class: 'btn btn-xs btn-primary' %>
+		 	
+		 	<%= link_to'Delete', article_path(@article),
+		 			method: :delete, date: {confirm: 'Are U Sure'}, class: 'btn btn-xs btn-danger' %>	
+		 	
+		 	<%= link_to'Edit', edit_article_path(@article),
+		 		 class: 'btn btn-xs btn-primary' %>
 
-<%end%>
+		 	<%= link_to'Listing All Articles',
+		 		 articles_path,class: 'btn btn-xs btn-success' %>	 
+		</div>
+	<%end%>
+</div>
 
-<br>
------------------------
-
-<p>
-	title: <%= @article.title %> 
-</p>
-
-<p>
-	 descrtption: <%= @article.description %>
-</p>
-----------
-<h4>
-	<%= @article.comments.count %> Comment
-</h4>
-
-<%= render @article.comments %>
-
-<br> ----
-
-<h2>Add Comment</h2>
-
-<%= render 'comments/form' %>
-
-<%= link_to'Listing All Articles' , articles_path %>
+<div class="col-xs-8 col-xs-offset-2">
+	<div class="center"> 
+		<h4><%= @article.comments.count %> Comment</h4>
+		<%= render @article.comments %>
+		<h2>Add Comment</h2>
+		<%= render 'comments/form' %>
+	</div>
+</div>

@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
 	def deactivate
   		if  @user.deactivated_account!
-    		flash[:notice] = 'admin deactivated this acc'
+    		flash[:danger] = 'Admin Deactivated This Acc'
     		redirect_to users_path
   		else
  	 	end
@@ -60,18 +60,18 @@ class UsersController < ApplicationController
 
 	def activate
 		if @user.activate_account!
-			flash[:success] = 'this user is active now'
+			flash[:success] = 'This User is Active Now'
 			redirect_to users_path(@user)	
 		else
 		end
 	end
 
 	 def sender
-      @user = User.find(params[:id])
+      @sender = User.find(params[:user_id])
     end
 
     def recipient
-      @user = User.find(params[:id])
+      @recipient = User.find(params[:user_id])
     end
     
 	#def toggle_activation

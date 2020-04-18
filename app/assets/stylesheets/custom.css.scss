@@ -1,4 +1,4 @@
-$navbar-default-bg: #602C50;
+$navbar-default-bg: #e35849;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -19,6 +19,27 @@ $navbar-default-bg: #602C50;
 
 .center{
 	text-align: center;
+}
+
+.article-actions{
+	border-top: 1px solid #eaeaea;
+	padding-top: 5px;
+}
+
+.description{
+	margin-top: 0;
+}
+
+.article-title{
+	font-wight: bold;
+	font-size: 1.5em;		
+}
+
+.article-body{
+	border-top: 1px solid #eaeaea;
+	padding-top: 15px;
+	padding-bottom: 15px;
+
 }
 
 footer{

@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
 
 	def show
 		if !logged_in?
-			flash[:danger] = 'u must be login'
+			flash[:danger] = 'You Have To Login First'
 			return 
 			redirect_to root_path
 		end
@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 		@article = Article.new(article_params)
 		@article.user = curent_user
 		if @article.save
-			flash[:notice] = "Article Was Successfuly created"
+			flash[:success] = "Article Was Successfuly Created"
 			redirect_to article_path(@article)
 		else
 			render 'new'
@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
 
 	def update
 		if @article.update(article_params)
-			flash[:notice] = "Article was Successfuly updated"
+			flash[:success] = "Article was Successfuly Updated"
 			redirect_to article_path(@article)
 		else
 			render 'edit'
@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
-		flash[:notice] = 'article was successfully deleted'
+		flash[:danger] = 'Article was Successfully Deleted'
 		redirect_to articles_path
 	end
 

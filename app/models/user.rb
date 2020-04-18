@@ -26,5 +26,5 @@ class User < ActiveRecord::Base
 	def activate
 		update_attribute :activate , true
 	end
-
+	
 end
